@@ -14,7 +14,8 @@
         <module>ins_collect</module>
         <module>ins_api</module>
         <module>ins_base</module>
-        <module>ins_message</module>
+
+             <module>ins_message</module>
     </modules>
 
     <parent>
