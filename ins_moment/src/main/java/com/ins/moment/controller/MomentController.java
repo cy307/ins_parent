@@ -39,8 +39,8 @@ public class MomentController implements MomentControllerApi {
     @Override
     @ApiOperation("增加动态")
     @PostMapping
-    public CommonResult saveMoment(@RequestBody Moment moment) {
-        return new CommonResult<>(CommonCode.SUCCESS, momentService.saveMoment(moment));
+    public CommonResult saveMoment(@RequestParam("userId") String userId,@RequestParam("content") String content) {
+        return new CommonResult<>(CommonCode.SUCCESS, momentService.saveMoment(userId,content));
     }
 
     @Override

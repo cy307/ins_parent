@@ -49,17 +49,10 @@ public class MomentService {
     }
 
 
-    public Moment saveMoment(Moment moment) {
-        //解析url
-        String photoUrl;
-        try {
-            if (!StringUtils.isEmpty(moment.getImgListUrl())) {
-                photoUrl = JSON.toJSONString(Arrays.asList(moment.getImgListUrl().split(";")));
-                moment.setImgListUrl(photoUrl);
-            }
-        } catch (Exception e) {
-            System.out.println("报错。。。");
-        }
+    public Moment saveMoment(String userId,String content) {
+        Moment moment = new Moment()
+                .setUserId(userId)
+                .setContent(content);
         return momentDao.save(moment);
     }
 

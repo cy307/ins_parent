@@ -3,7 +3,7 @@ package com.ins.message.service.sms;
 
 import com.ins.common.result.CommonCode;
 import com.ins.common.result.CommonResult;
-import com.ins.message.constant.MessageStatus;
+import com.ins.common.status.CommonStatus;
 import com.ins.message.dao.SmsDao;
 import com.ins.message.dao.TemplateDao;
 import com.ins.model.message.Sms;
@@ -37,7 +37,7 @@ public class SmsService {
             Sms sms = new Sms()
                     .setMobile(mobile)
                     .setTemplateId(templateId)
-                    .setSendStatus(MessageStatus.CREATED)
+                    .setSendStatus(CommonStatus.CREATED)
                     .setParams(params)
                     .setCreateTime(LocalDateTime.now())
                     .setUpdateTime(LocalDateTime.now());
@@ -73,10 +73,10 @@ public class SmsService {
         } while (iterator.hasNext());
 
         if (result.isSuccess()) {
-            sms.setSendStatus(MessageStatus.SUCCESS);
+            sms.setSendStatus(CommonStatus.SUCCESS);
             logger.info("短信发送成功，sms:[{}]", sms);
         } else {
-            sms.setSendStatus(MessageStatus.FAILED);
+            sms.setSendStatus(CommonStatus.FAILED);
             logger.info("短信发送失败，smsId:[{}],e:[{}]", sms.getId(), result.getData());
         }
         sms.setRetry(retryNum);

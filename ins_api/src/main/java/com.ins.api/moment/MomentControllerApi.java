@@ -23,7 +23,7 @@ public interface MomentControllerApi {
 
     @ApiOperation("增加动态")
     @PostMapping
-    CommonResult saveMoment(@RequestBody Moment moment);
+    CommonResult saveMoment(@RequestParam("userId") String userId,@RequestParam("content") String content);
 
     @ApiOperation("更新动态")
     @PutMapping

@@ -3,7 +3,7 @@ package com.ins.message.service.email;
 
 import com.ins.common.result.CommonCode;
 import com.ins.common.result.CommonResult;
-import com.ins.message.constant.MessageStatus;
+import com.ins.common.status.CommonStatus;
 import com.ins.message.dao.EmailDao;
 import com.ins.model.message.Email;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ public class EmailService {
     public void sendEmail(String sendTo, String subject,String content) {
         try {
             Email email = new Email().setSendTo(sendTo)
-                    .setSendStatus(MessageStatus.CREATED)
+                    .setSendStatus(CommonStatus.CREATED)
                     .setSubject(subject)
                     .setContent(content)
                     .setCreateTime(LocalDateTime.now())
@@ -65,10 +65,10 @@ public class EmailService {
         } while (iterator.hasNext());
 
         if (result.isSuccess()) {
-            email.setSendStatus(MessageStatus.SUCCESS);
+            email.setSendStatus(CommonStatus.SUCCESS);
             logger.info("邮件发送成功，email:[{}]", email);
         } else {
-            email.setSendStatus(MessageStatus.FAILED);
+            email.setSendStatus(CommonStatus.FAILED);
             logger.info("邮件发送失败，emailId:[{}],e:[{}]", email.getId(), result.getData());
         }
         email.setRetry(retryNum);
