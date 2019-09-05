@@ -29,6 +29,10 @@ public class QiniuService {
     @Value("${qiniu.bucketName}")
     private String bucketName;
 
+    @Value("${qiniu.domainUrl}")
+    private String domainUrl;
+
+    private Auth auth;
     private String uploadToken;
 
     private UploadManager uploadManager;
@@ -36,7 +40,7 @@ public class QiniuService {
     @PostConstruct
     public void init() {
         //初始化上传token
-        Auth auth = Auth.create(accesskey, secretKey);
+        auth = Auth.create(accesskey, secretKey);
         uploadToken = auth.uploadToken(bucketName);
         //初始化上传对象
         Zone z = Zone.autoZone();
@@ -54,6 +58,11 @@ public class QiniuService {
         } catch (QiniuException e) {
             return new CommonResult<>(CommonCode.FAIL, e.getMessage());
         }
+    }
+
+    public String download(String url) {
+        String downloadUrl = auth.privateDownloadUrl(url, 3600);
+        return domainUrl + downloadUrl;
     }
 
 }

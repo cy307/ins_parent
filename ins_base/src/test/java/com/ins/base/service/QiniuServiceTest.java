@@ -1,7 +1,5 @@
 package com.ins.base.service;
 
-import com.ins.common.photo.PhotoType;
-import com.ins.common.photo.UploadUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +23,18 @@ public class QiniuServiceTest {
 
     @Autowired
     FileUploadService fileUploadService;
-    @Autowired
-    FileUploadService uploadHeadPhoto;
+
 
     @Test
-
     public void testUpLoad() throws IOException {
         File f = new File("D://imag.png");
         byte[] bytes = Files.readAllBytes(f.toPath());
-        uploadHeadPhoto.uploadHeadPhoto("1",bytes);
+        fileUploadService.uploadHeadPhoto("1",bytes);
+    }
+    @Test
+    public void testDownLoad() throws IOException {
+        String download = fileUploadService.download("3_HEAD_2019-09-04T18:06:41.412.jpg");
+        System.out.println("download = " + download);
     }
 
 }

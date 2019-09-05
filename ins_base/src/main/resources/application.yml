@@ -19,4 +19,5 @@ qiniu:
   accessKey: TBFn36bwRmnMZvxtm0sKGT2Y1G0bt-8bvZwzPOoA
   secretKey: va2ErSr_60iJI5QHiNLUKvzQLcErIaFB0VpZG0UB
   bucketName: ins
+  domainUrl: http://px8y7p2wz.bkt.clouddn.com/
 

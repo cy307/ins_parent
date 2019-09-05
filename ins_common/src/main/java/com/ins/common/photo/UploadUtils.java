@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
  */
 public class UploadUtils {
     public static String generatePath(String userId, String photoType) {
-        return userId + "_" + photoType + "_" + LocalDateTime.now();
+        return userId + "_" + photoType + "_" + LocalDateTime.now()+".jpg";
     }
 }

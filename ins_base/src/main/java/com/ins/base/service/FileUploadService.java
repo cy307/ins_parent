@@ -45,7 +45,7 @@ public class FileUploadService {
         recordPhotoDao.save(recordPhoto);
     }
 
-    public void uploadMomentPhoto(String customerId,String momentId, byte[] data) {
+    public void uploadMomentPhoto(String customerId, String momentId, byte[] data) {
 
         String path = UploadUtils.generatePath(customerId, PhotoType.HEAD);
         RecordPhoto recordPhoto = new RecordPhoto()
@@ -67,5 +67,9 @@ public class FileUploadService {
         recordPhoto.setResponse(result.getData());
         recordPhoto.setUpdateTime(LocalDateTime.now());
         recordPhotoDao.save(recordPhoto);
+    }
+
+    public String download(String url) {
+        return qiniuService.download(url);
     }
 }

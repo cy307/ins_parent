@@ -1,8 +1,10 @@
 package com.ins.moment.service;
 
 import com.alibaba.fastjson.JSON;
+import com.ins.common.result.CommonResult;
 import com.ins.model.moment.Moment;
 import com.ins.model.user.User;
+import com.ins.moment.client.FileClient;
 import com.ins.moment.client.UserClient;
 import com.ins.moment.dao.MomentDao;
 import org.apache.commons.lang.StringUtils;
@@ -34,6 +36,9 @@ public class MomentServiceTest {
 
     @Autowired
     MomentDao momentDao;
+
+    @Autowired
+    FileClient fileClient;
 
     @Test
     public void testPhotoJson() {
@@ -88,6 +93,11 @@ public class MomentServiceTest {
         System.out.println("moments = " + moments);
     }
 
+    @Test
+    public void testFileClient(){
+        CommonResult<List<String>> momentPhotosByMomentId = fileClient.findMomentPhotosByMomentId("3");
+        System.out.println("momentPhotosByMomentId = " + momentPhotosByMomentId);
+    }
 
 
 }

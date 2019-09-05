@@ -8,6 +8,7 @@ import com.ins.model.moment.Comment;
 import com.ins.model.moment.Moment;
 import com.ins.model.moment.UserFollowListMomentVo;
 import com.ins.model.user.User;
+import com.ins.moment.client.FileClient;
 import com.ins.moment.client.UserClient;
 import com.ins.moment.dao.CommentDao;
 import com.ins.moment.dao.MomentDao;
@@ -37,8 +38,11 @@ public class MomentService {
     @Autowired
     CommentDao commentDao;
 
+    @Autowired
+    FileClient fileClient;
 
-    static int PAGE_SIZE = 1;
+
+    static int PAGE_SIZE = 5;
 
     public Moment getMomentById(String id) {
         Optional<Moment> momentOptional = momentDao.findById(id);
@@ -108,11 +112,12 @@ public class MomentService {
             //动态数据
             momentVo.setMomentId(moment.getId())
                     .setMomentCreateTime(moment.getCreateTime())
-                    .setMomentContent(moment.getContent())
-                    .setMomentImgList(JSON.parseObject(moment.getImgListUrl(), List.class));
+                    .setMomentContent(moment.getContent());
+            List<String> photos = fileClient.findMomentPhotosByMomentId(moment.getId()).getData();
+            momentVo.setMomentImgList(photos);
             //评论数据
             List<Comment> comments = new ArrayList<>();
-            commentDao.getByMomentId(moment.getId()).stream().forEach(x -> {
+            commentDao.getByMomentId(moment.getId()).forEach(x -> {
                 x.setUserName(userClient.getUserInfo(x.getUserId()).getData().getUsername());
                 comments.add(x);
             });
