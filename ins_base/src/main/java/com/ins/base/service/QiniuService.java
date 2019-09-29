@@ -32,6 +32,10 @@ public class QiniuService {
     @Value("${qiniu.domainUrl}")
     private String domainUrl;
 
+    @Value("${qiniu.photoFormatName}")
+    private String photoFormatName;
+
+
     private Auth auth;
     private String uploadToken;
 
@@ -61,7 +65,8 @@ public class QiniuService {
     }
 
     public String download(String url) {
-        String downloadUrl = auth.privateDownloadUrl(url, 3600);
+        //图片裁剪
+        String downloadUrl = auth.privateDownloadUrl(url + "-" + photoFormatName, 3600);
         return domainUrl + downloadUrl;
     }
 

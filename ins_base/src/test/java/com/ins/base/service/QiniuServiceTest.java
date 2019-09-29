@@ -33,7 +33,7 @@ public class QiniuServiceTest {
     }
     @Test
     public void testDownLoad() throws IOException {
-        String download = fileUploadService.download("3_HEAD_2019-09-04T18:06:41.412.jpg");
+        String download = fileUploadService.download("1_HEAD_2019-09-05T15:10:15.333.jpg");
         System.out.println("download = " + download);
     }
 

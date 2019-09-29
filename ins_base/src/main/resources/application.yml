@@ -20,4 +20,5 @@ qiniu:
   secretKey: va2ErSr_60iJI5QHiNLUKvzQLcErIaFB0VpZG0UB
   bucketName: ins
   domainUrl: http://px8y7p2wz.bkt.clouddn.com/
+  photoFormatName: ins
 
